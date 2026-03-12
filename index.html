@@ -20,9 +20,7 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--ink);
@@ -34,12 +32,17 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 3rem;
+    padding: 0.75rem 3rem;
     background: rgba(10,14,26,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
-  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.15em; color: var(--gold); }
+  .nav-logo img {
+    height: 36px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+  }
   .nav-pills { display: flex; gap: 0.4rem; }
   .nav-pill {
     font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
@@ -77,16 +80,12 @@
     margin-bottom: 1.5rem;
   }
   .hero-title span { color: var(--gold); }
-  .hero-sub {
-    color: var(--mist); font-size: 1rem; line-height: 1.7; max-width: 480px;
-  }
+  .hero-sub { color: var(--mist); font-size: 1rem; line-height: 1.7; max-width: 480px; }
   .hero-meta { margin-top: 2.5rem; display: flex; gap: 2rem; }
   .hero-meta-item { font-size: 0.75rem; color: var(--mist); }
   .hero-meta-item strong { display: block; font-size: 1.4rem; font-family: 'Syne', sans-serif; color: var(--paper); margin-bottom: 0.1rem; }
 
-  .hero-visual {
-    position: relative; display: flex; align-items: center; justify-content: center;
-  }
+  .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; }
   .orbit-ring {
     position: relative; width: 380px; height: 380px;
     border: 1px solid rgba(201,168,76,0.2); border-radius: 50%;
@@ -124,59 +123,41 @@
 
   /* SECTION HEADERS */
   .slide-header { margin-bottom: 3rem; }
-  .slide-number {
-    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 0.5rem; font-weight: 600;
-  }
-  .slide-title {
-    font-family: 'Syne', sans-serif; font-weight: 700;
-    font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.1;
-  }
+  .slide-number { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; font-weight: 600; }
+  .slide-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.1; }
   .slide-title span { color: var(--gold); }
   .slide-desc { color: var(--mist); margin-top: 0.6rem; font-size: 0.95rem; line-height: 1.6; max-width: 700px; }
 
-  /* DARK BG VARIATIONS */
   .bg-dark { background: var(--ink); }
   .bg-darker { background: #060810; }
   .bg-steel { background: #111827; }
 
-  /* DIVIDERS */
   .divider { width: 60px; height: 3px; background: var(--accent); margin: 1rem 0 2rem; }
 
   /* PROCESS FLOW */
-  .process-flow {
-    display: flex; align-items: stretch; gap: 0; margin-top: 1rem;
-    overflow-x: auto; padding-bottom: 1rem;
-  }
+  .process-flow { display: flex; align-items: stretch; gap: 0; margin-top: 1rem; overflow-x: auto; padding-bottom: 1rem; }
   .process-step {
     flex: 1; min-width: 140px; background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.08); border-right: none;
-    padding: 1.5rem 1.2rem;
-    position: relative; transition: background 0.3s;
+    padding: 1.5rem 1.2rem; position: relative; transition: background 0.3s;
   }
   .process-step:last-child { border-right: 1px solid rgba(255,255,255,0.08); }
   .process-step:hover { background: rgba(255,255,255,0.06); }
   .process-step::after {
-    content: '→';
-    position: absolute; right: -14px; top: 50%;
-    transform: translateY(-50%);
-    color: var(--gold); font-size: 1.2rem; z-index: 2;
+    content: '→'; position: absolute; right: -14px; top: 50%;
+    transform: translateY(-50%); color: var(--gold); font-size: 1.2rem; z-index: 2;
     background: var(--ink); padding: 0 2px;
   }
   .process-step:last-child::after { display: none; }
-  .step-num {
-    font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
-    color: rgba(201,168,76,0.15); line-height: 1; margin-bottom: 0.5rem;
-  }
+  .step-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: rgba(201,168,76,0.15); line-height: 1; margin-bottom: 0.5rem; }
   .step-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.4rem; font-weight: 600; }
   .step-title { font-size: 0.85rem; font-weight: 500; color: var(--paper); margin-bottom: 0.3rem; }
   .step-note { font-size: 0.72rem; color: var(--mist); line-height: 1.4; }
 
-  /* ISSUE HIGHLIGHT */
+  /* ISSUE BOX */
   .issue-box {
     background: rgba(232,56,13,0.08); border: 1px solid rgba(232,56,13,0.3);
-    border-left: 4px solid var(--accent);
-    padding: 1.2rem 1.5rem; border-radius: 2px; margin-top: 1.5rem;
+    border-left: 4px solid var(--accent); padding: 1.2rem 1.5rem; border-radius: 2px; margin-top: 1.5rem;
   }
   .issue-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 0.4rem; }
   .issue-text { font-size: 0.9rem; color: var(--paper); line-height: 1.6; }
@@ -184,16 +165,11 @@
   /* PHASE CARDS */
   .phase-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem; }
   .phase-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 1.5rem; position: relative; overflow: hidden;
-    transition: transform 0.3s, border-color 0.3s;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    padding: 1.5rem; position: relative; overflow: hidden; transition: transform 0.3s, border-color 0.3s;
   }
   .phase-card:hover { transform: translateY(-4px); border-color: var(--gold); }
-  .phase-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: var(--accent);
-  }
+  .phase-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); }
   .phase-card.parallel::before { background: var(--gold); }
   .phase-num { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; color: rgba(255,255,255,0.05); line-height: 1; margin-bottom: 0.8rem; }
   .phase-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--paper); margin-bottom: 0.5rem; }
@@ -203,57 +179,31 @@
   .phase-tag { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 100px; margin-top: 1rem; display: inline-block; }
   .tag-seq { background: rgba(232,56,13,0.15); color: var(--accent); border: 1px solid rgba(232,56,13,0.3); }
   .tag-par { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
-
   .parallel-note {
     grid-column: 1/-1; background: rgba(201,168,76,0.06);
-    border: 1px dashed rgba(201,168,76,0.3);
-    padding: 0.8rem 1.5rem; font-size: 0.8rem; color: var(--gold);
-    text-align: center;
+    border: 1px dashed rgba(201,168,76,0.3); padding: 0.8rem 1.5rem; font-size: 0.8rem; color: var(--gold); text-align: center;
   }
 
   /* DATA PILLARS */
   .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 1rem; }
-  .pillar {
-    position: relative; padding: 2rem 1.5rem;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.07);
-    transition: all 0.3s;
-  }
+  .pillar { position: relative; padding: 2rem 1.5rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); transition: all 0.3s; }
   .pillar:hover { background: rgba(255,255,255,0.05); }
-  .pillar-num {
-    font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800;
-    color: rgba(201,168,76,0.08); position: absolute; top: 0.5rem; right: 1rem;
-    line-height: 1;
-  }
+  .pillar-num { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; color: rgba(201,168,76,0.08); position: absolute; top: 0.5rem; right: 1rem; line-height: 1; }
   .pillar-icon { font-size: 1.8rem; margin-bottom: 1rem; }
   .pillar-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--paper); margin-bottom: 0.5rem; }
   .pillar-source { font-size: 0.7rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; }
   .pillar-desc { font-size: 0.78rem; color: var(--mist); line-height: 1.6; }
-  .pillar-status {
-    margin-top: 1rem; padding: 0.3rem 0.7rem; border-radius: 2px;
-    font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
-    display: inline-block;
-  }
+  .pillar-status { margin-top: 1rem; padding: 0.3rem 0.7rem; border-radius: 2px; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; display: inline-block; }
   .status-easy { background: rgba(26,138,90,0.15); color: var(--safe); border: 1px solid rgba(26,138,90,0.3); }
   .status-hard { background: rgba(232,56,13,0.15); color: var(--risk); border: 1px solid rgba(232,56,13,0.3); }
   .status-med { background: rgba(212,135,15,0.15); color: var(--warn); border: 1px solid rgba(212,135,15,0.3); }
 
   /* ROLLING PLAN */
   .rolling-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
-  .rolling-table th {
-    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--mist); font-weight: 500; padding: 0.6rem 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left;
-  }
-  .rolling-table td {
-    padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);
-    font-size: 0.85rem; vertical-align: middle;
-  }
+  .rolling-table th { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mist); font-weight: 500; padding: 0.6rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left; }
+  .rolling-table td { padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; vertical-align: middle; }
   .rolling-table tr:hover td { background: rgba(255,255,255,0.02); }
-  .month-badge {
-    font-family: 'Syne', sans-serif; font-weight: 700;
-    font-size: 1rem; color: var(--paper);
-  }
+  .month-badge { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: var(--paper); }
   .bar-wrap { background: rgba(255,255,255,0.05); border-radius: 2px; height: 10px; margin-top: 0.3rem; }
   .bar-fill { height: 10px; border-radius: 2px; }
   .act-bar { background: var(--accent); }
@@ -262,15 +212,9 @@
 
   /* DMAIC */
   .dmaic-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: rgba(255,255,255,0.06); margin-top: 1.5rem; }
-  .dmaic-cell {
-    background: var(--ink); padding: 1.8rem 1.2rem;
-    transition: background 0.3s;
-  }
+  .dmaic-cell { background: var(--ink); padding: 1.8rem 1.2rem; transition: background 0.3s; }
   .dmaic-cell:hover { background: rgba(255,255,255,0.04); }
-  .dmaic-letter {
-    font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800;
-    line-height: 1; margin-bottom: 0.3rem;
-  }
+  .dmaic-letter { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 0.3rem; }
   .dmaic-word { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mist); margin-bottom: 1rem; }
   .dmaic-content { font-size: 0.8rem; color: var(--paper); line-height: 1.6; }
   .dmaic-content li { list-style: none; padding: 0.2rem 0; color: var(--mist); font-size: 0.75rem; }
@@ -278,33 +222,18 @@
 
   /* VISIBILITY TABLE */
   .vis-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
-  .vis-table th {
-    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--mist); font-weight: 600; padding: 0.8rem 1rem;
-    border-bottom: 2px solid rgba(255,255,255,0.1); text-align: left;
-    background: rgba(255,255,255,0.02);
-  }
+  .vis-table th { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mist); font-weight: 600; padding: 0.8rem 1rem; border-bottom: 2px solid rgba(255,255,255,0.1); text-align: left; background: rgba(255,255,255,0.02); }
   .vis-table td { padding: 0.9rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
   .vis-table tr:hover td { background: rgba(255,255,255,0.03); }
-  .risk-chip {
-    padding: 0.25rem 0.7rem; border-radius: 100px; font-size: 0.7rem; font-weight: 600;
-    display: inline-block;
-  }
+  .risk-chip { padding: 0.25rem 0.7rem; border-radius: 100px; font-size: 0.7rem; font-weight: 600; display: inline-block; }
   .chip-high { background: rgba(232,56,13,0.2); color: #ff6347; border: 1px solid rgba(232,56,13,0.4); }
   .chip-med { background: rgba(212,135,15,0.2); color: #f0a030; border: 1px solid rgba(212,135,15,0.4); }
   .chip-low { background: rgba(26,138,90,0.2); color: #3cb87a; border: 1px solid rgba(26,138,90,0.4); }
 
   /* IMPACT */
   .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
-  .impact-card {
-    padding: 1.8rem 1.5rem; background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    position: relative; overflow: hidden;
-  }
-  .impact-card::after {
-    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, var(--gold), transparent);
-  }
+  .impact-card { padding: 1.8rem 1.5rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+  .impact-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); }
   .impact-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
   .impact-head { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--paper); margin-bottom: 0.4rem; }
   .impact-body { font-size: 0.78rem; color: var(--mist); line-height: 1.6; }
@@ -316,45 +245,39 @@
     justify-content: center; text-align: center; padding: 7rem 4rem;
   }
   .closing-tag { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
-  .closing-title {
-    font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4.5rem);
-    font-weight: 800; line-height: 1.05; max-width: 900px; margin-bottom: 2rem;
-  }
+  .closing-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.05; max-width: 900px; margin-bottom: 2rem; }
   .closing-title .line2 { color: var(--gold); display: block; }
   .closing-sub { color: var(--mist); font-size: 1rem; max-width: 600px; line-height: 1.7; margin-bottom: 3rem; }
   .closing-badges { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-  .badge {
-    padding: 0.6rem 1.4rem; border: 1px solid rgba(201,168,76,0.4);
-    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--gold); font-weight: 600;
-  }
+  .badge { padding: 0.6rem 1.4rem; border: 1px solid rgba(201,168,76,0.4); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
 
-  /* GUTTER LINES */
-  .gutter-line {
-    position: absolute; top: 0; bottom: 0; width: 1px;
-    background: rgba(255,255,255,0.03);
-  }
-
-  /* FOOTER OF SLIDE */
+  /* SLIDE FOOTER */
   .slide-footer {
     position: absolute; bottom: 1.5rem; left: 3rem; right: 3rem;
     display: flex; justify-content: space-between; align-items: center;
     border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1rem;
   }
+  .sf-left { display: flex; align-items: center; gap: 1rem; }
   .sf-brand { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
   .sf-page { font-family: 'Syne', sans-serif; font-size: 0.7rem; color: rgba(255,255,255,0.2); }
 
+  /* POWERED BY — bottom right */
+  .sf-powered {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 3px;
+  }
+  .sf-powered-label {
+    font-style: italic; font-size: 0.6rem; letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.25);
+  }
+  .sf-powered img {
+    height: 18px; width: auto; object-fit: contain;
+    opacity: 0.45; filter: brightness(1.5);
+  }
+
   /* CONNECTOR CHAIN */
   .chain { display: flex; align-items: center; gap: 0; margin: 1.5rem 0; overflow-x: auto; }
-  .chain-node {
-    padding: 0.8rem 1.2rem; background: rgba(44,62,107,0.4);
-    border: 1px solid rgba(44,62,107,0.8);
-    font-size: 0.8rem; font-weight: 500; white-space: nowrap; text-align: center;
-    flex-shrink: 0;
-  }
-  .chain-node.highlight {
-    background: rgba(201,168,76,0.15); border-color: var(--gold); color: var(--gold); font-weight: 700;
-  }
+  .chain-node { padding: 0.8rem 1.2rem; background: rgba(44,62,107,0.4); border: 1px solid rgba(44,62,107,0.8); font-size: 0.8rem; font-weight: 500; white-space: nowrap; text-align: center; flex-shrink: 0; }
+  .chain-node.highlight { background: rgba(201,168,76,0.15); border-color: var(--gold); color: var(--gold); font-weight: 700; }
   .chain-arr { color: var(--gold); padding: 0 0.3rem; font-size: 1rem; flex-shrink: 0; }
 
   /* PROBLEM CARDS */
@@ -365,15 +288,8 @@
   .prob-body { font-size: 0.75rem; color: var(--mist); line-height: 1.6; }
 
   /* SCROLL INDICATOR */
-  .scroll-hint {
-    position: absolute; bottom: 3.5rem; left: 50%; transform: translateX(-50%);
-    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(255,255,255,0.2); text-align: center;
-  }
-  .scroll-hint::after {
-    content: '↓'; display: block; font-size: 1.2rem; margin-top: 0.2rem;
-    animation: bounce 2s infinite;
-  }
+  .scroll-hint { position: absolute; bottom: 3.5rem; left: 50%; transform: translateX(-50%); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.2); text-align: center; }
+  .scroll-hint::after { content: '↓'; display: block; font-size: 1.2rem; margin-top: 0.2rem; animation: bounce 2s infinite; }
   @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
 
   /* RESPONSIVE */
@@ -392,7 +308,9 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">OEL Raising the Standard of EMS Performance</div>
+  <div class="nav-logo">
+    <img src="oel.png" alt="OEL" />
+  </div>
   <div class="nav-pills">
     <a class="nav-pill" href="#context">Context</a>
     <a class="nav-pill" href="#process">Process</a>
@@ -408,7 +326,7 @@
 <!-- HERO -->
 <section id="hero" class="slide">
   <div>
-    <div class="hero-eyebrow">OEL Raising the Standard of EMS Performance</div>
+    <div class="hero-eyebrow">OEL · Raising the Standard of EMS Performance</div>
     <h1 class="hero-title">
       SKU-Level<br><span>Production</span><br>Readiness
     </h1>
@@ -434,8 +352,14 @@
   </div>
   <div class="scroll-hint">Scroll to explore</div>
   <div class="slide-footer">
-    <span class="sf-brand">Confidential · Internal Use Only</span>
+    <div class="sf-left">
+      <span class="sf-brand">Confidential · Internal Use Only</span>
+    </div>
     <span class="sf-page">01 / 08</span>
+    <div class="sf-powered">
+      <span class="sf-powered-label">powered by:</span>
+      <img src="opex.png" alt="Opex" />
+    </div>
   </div>
 </section>
 
@@ -447,7 +371,6 @@
     <div class="divider"></div>
     <p class="slide-desc">Critical planning data sits across multiple teams with no integration — creating blind spots in material readiness assessment.</p>
   </div>
-
   <div class="prob-grid">
     <div class="prob-card">
       <div class="prob-icon">📦</div>
@@ -457,7 +380,7 @@
     <div class="prob-card">
       <div class="prob-icon">⏱️</div>
       <div class="prob-title">Lead Time Not BOM-Based</div>
-      <div class="prob-body">Lead times are provided at a general product level, not component level. Critical long-lead components are missed until it's too late.</div>
+      <div class="prob-body">Lead times are provided at a general product level, not SKU level. Critical long-lead components are missed until it's too late.</div>
     </div>
     <div class="prob-card">
       <div class="prob-icon">🔗</div>
@@ -480,10 +403,13 @@
       <div class="prob-body">Delivery delays → customer dissatisfaction → financial target discrepancies → revenue impact. The problem cascades from planning all the way to business performance.</div>
     </div>
   </div>
-
   <div class="slide-footer">
-    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <div class="sf-left"><span class="sf-brand">Confidential · Internal Use Only</span></div>
     <span class="sf-page">02 / 08</span>
+    <div class="sf-powered">
+      <span class="sf-powered-label">powered by:</span>
+      <img src="opex.png" alt="Opex" />
+    </div>
   </div>
 </section>
 
@@ -495,7 +421,6 @@
     <div class="divider"></div>
     <p class="slide-desc">The current information flow from customer forecast to production — with the critical gap identified.</p>
   </div>
-
   <div class="process-flow">
     <div class="process-step">
       <div class="step-num">01</div>
@@ -540,15 +465,17 @@
       <div class="step-note" style="color: rgba(232,56,13,0.7);">Without consulting logistics. No component-level analysis.</div>
     </div>
   </div>
-
   <div class="issue-box">
     <div class="issue-label">⚠ Critical Gap Identified</div>
     <div class="issue-text">Lead time used in planning is <strong>not BOM-specific</strong>. It is provided at product level rather than component level — meaning long-lead critical components are never flagged until a shortage occurs. Additionally, logistics is not consulted, creating a disconnect in dispatch planning.</div>
   </div>
-
   <div class="slide-footer">
-    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <div class="sf-left"><span class="sf-brand">Confidential · Internal Use Only</span></div>
     <span class="sf-page">03 / 08</span>
+    <div class="sf-powered">
+      <span class="sf-powered-label">powered by:</span>
+      <img src="opex.png" alt="Opex" />
+    </div>
   </div>
 </section>
 
@@ -560,7 +487,6 @@
     <div class="divider"></div>
     <p class="slide-desc">Phases 2 and 3 should run in parallel — BOM lead time analysis and PPC forecast preparation complete simultaneously before material planning begins.</p>
   </div>
-
   <div class="phase-grid">
     <div class="phase-card">
       <div class="phase-num">01</div>
@@ -611,13 +537,16 @@
       <span class="phase-tag tag-seq">After Phase 2+3</span>
     </div>
     <div class="parallel-note">
-      ⚡ Phases 2 and 3 must run concurrently — both must be completed before Phase 4 begins. This is the key structural improvement over the current sequential process.
+      ⚡ Phases 2 and 3 must run concurrently — both must be completed before Phase 4 begins. This is the key structural improvement over the current sequential process to verify forcast vs the ordering plan.
     </div>
   </div>
-
   <div class="slide-footer">
-    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <div class="sf-left"><span class="sf-brand">Confidential · Internal Use Only</span></div>
     <span class="sf-page">04 / 08</span>
+    <div class="sf-powered">
+      <span class="sf-powered-label">powered by:</span>
+      <img src="opex.png" alt="Opex" />
+    </div>
   </div>
 </section>
 
@@ -629,7 +558,6 @@
     <div class="divider"></div>
     <p class="slide-desc">Four connected datasets — when combined — deliver complete SKU-level production readiness visibility.</p>
   </div>
-
   <div class="chain">
     <div class="chain-node highlight">Brand + SKU</div>
     <div class="chain-arr">→</div>
@@ -641,7 +569,6 @@
     <div class="chain-arr">→</div>
     <div class="chain-node" style="background: rgba(232,56,13,0.15); border-color: var(--accent); color: var(--paper);">Full Visibility + Risk Alerts</div>
   </div>
-
   <div class="pillars">
     <div class="pillar">
       <div class="pillar-num">1</div>
@@ -656,13 +583,13 @@
       <div class="pillar-icon">🔩</div>
       <div class="pillar-name">SKU w.r.t. BOM</div>
       <div class="pillar-source">Source: NPI Team</div>
-      <div class="pillar-desc">Each SKU variant maps to a complete BOM including all alternates. Enables precise component-level requirement calculation per product configuration.</div>
+      <div class="pillar-desc">Each SKU variant maps to a complete BOM including all alternates. Enables precise SKU-level requirement calculation per product configuration.</div>
       <span class="pillar-status status-easy">✓ Available via NPI</span>
     </div>
     <div class="pillar">
       <div class="pillar-num">3</div>
       <div class="pillar-icon">⏳</div>
-      <div class="pillar-name">Component w.r.t. Lead Time</div>
+      <div class="pillar-name">SKU w.r.t. Lead Time</div>
       <div class="pillar-source">Source: Purchase / ODM / PM</div>
       <div class="pillar-desc">
         <strong style="color:var(--safe);font-size:0.7rem;">Local:</strong> Purchase team has invoices — extractable.<br><br>
@@ -679,10 +606,13 @@
       <span class="pillar-status status-med">→ PM to Provide</span>
     </div>
   </div>
-
   <div class="slide-footer">
-    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <div class="sf-left"><span class="sf-brand">Confidential · Internal Use Only</span></div>
     <span class="sf-page">05 / 08</span>
+    <div class="sf-powered">
+      <span class="sf-powered-label">powered by:</span>
+      <img src="opex.png" alt="Opex" />
+    </div>
   </div>
 </section>
 
@@ -694,7 +624,6 @@
     <div class="divider"></div>
     <p class="slide-desc">When Month 1 production is active, materials for Month 2 & 3 must already be secured. Month 4 procurement planning initiates at Month 1 midpoint.</p>
   </div>
-
   <table class="rolling-table">
     <thead>
       <tr>
@@ -748,15 +677,17 @@
       </tr>
     </tbody>
   </table>
-
   <div class="issue-box" style="border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.05); border-left-color: var(--gold); margin-top: 1.5rem;">
     <div class="issue-label" style="color:var(--gold);">💡 Key Principle</div>
     <div class="issue-text">This rolling approach ensures <strong>continuous material flow</strong> and prevents production stoppages. Lead time of critical components must be considered from the start — not after a shortage occurs.</div>
   </div>
-
   <div class="slide-footer">
-    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <div class="sf-left"><span class="sf-brand">Confidential · Internal Use Only</span></div>
     <span class="sf-page">06 / 08</span>
+    <div class="sf-powered">
+      <span class="sf-powered-label">powered by:</span>
+      <img src="opex.png" alt="Opex" />
+    </div>
   </div>
 </section>
 
@@ -768,7 +699,6 @@
     <div class="divider"></div>
     <p class="slide-desc">Following Six Sigma's structured DMAIC approach to systematically eliminate the planning visibility gap. Control phase will be developed over time.</p>
   </div>
-
   <div class="dmaic-grid">
     <div class="dmaic-cell">
       <div class="dmaic-letter" style="color: var(--accent);">D</div>
@@ -792,7 +722,7 @@
         <p style="color:var(--paper);font-size:0.8rem;margin-bottom:0.8rem;">Collect and measure:</p>
         <ul>
           <li>Complete BOM data per SKU</li>
-          <li>Component-level lead times</li>
+          <li>SKU-level lead times</li>
           <li>Current inventory levels</li>
           <li>Planning delay frequency</li>
           <li>Procurement escalations</li>
@@ -807,7 +737,7 @@
         <p style="color:var(--paper);font-size:0.8rem;margin-bottom:0.8rem;">Root causes identified:</p>
         <ul>
           <li>BOM not integrated with planning</li>
-          <li>Lead time not component-wise</li>
+          <li>Lead time not SKU-wise</li>
           <li>ODM dependency creates blindspots</li>
           <li>Fragmented data ownership</li>
           <li>Logistics not in planning loop</li>
@@ -838,18 +768,19 @@
         <ul>
           <li>Regular data update cycles</li>
           <li>Standardized reporting cadence</li>
-         
           <li>Exception-based alerts</li>
-          
           <li style="color:var(--gold);font-style:italic;">Still being analyzed...</li>
         </ul>
       </div>
     </div>
   </div>
-
   <div class="slide-footer">
-    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <div class="sf-left"><span class="sf-brand">Confidential · Internal Use Only</span></div>
     <span class="sf-page">07 / 08</span>
+    <div class="sf-powered">
+      <span class="sf-powered-label">powered by:</span>
+      <img src="opex.png" alt="Opex" />
+    </div>
   </div>
 </section>
 
@@ -861,7 +792,6 @@
     <div class="divider"></div>
     <p class="slide-desc">When all four data pillars are combined, this is what the planner sees — complete SKU-level production readiness at a glance.</p>
   </div>
-
   <table class="vis-table">
     <thead>
       <tr>
@@ -923,7 +853,6 @@
       </tr>
     </tbody>
   </table>
-
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;">
     <div class="issue-box">
       <div class="issue-label">⚠ Without This View</div>
@@ -934,10 +863,13 @@
       <div class="issue-text" style="font-size:0.82rem;">Procurement can be triggered 45–60 days early. Rolling plan activates automatically. Line stoppages are prevented before they occur. Financial targets protected.</div>
     </div>
   </div>
-
   <div class="slide-footer">
-    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <div class="sf-left"><span class="sf-brand">Confidential · Internal Use Only</span></div>
     <span class="sf-page">08 / 08</span>
+    <div class="sf-powered">
+      <span class="sf-powered-label">powered by:</span>
+      <img src="opex.png" alt="Opex" />
+    </div>
   </div>
 </section>
 
@@ -949,7 +881,6 @@
     <div class="divider"></div>
     <p class="slide-desc">This is not a short-term project. It will take time to build — but the business impact will be significant and lasting.</p>
   </div>
-
   <div class="impact-grid">
     <div class="impact-card">
       <div class="impact-icon">🔍</div>
@@ -982,15 +913,17 @@
       <div class="impact-body">Eliminating delays protects revenue. Accurate planning reduces emergency procurement costs and excess inventory carrying costs.</div>
     </div>
   </div>
-
   <div class="issue-box" style="border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.05);border-left-color:var(--gold);margin-top:1.5rem;">
     <div class="issue-label" style="color:var(--gold);">🎯 Core Objective</div>
     <div class="issue-text">Create SKU-level production readiness visibility by linking BOM components, supplier lead times, inventory availability, and forecast demand — to enable accurate material planning and prevent production disruptions. SAP go-live (Apr 1) will add further structural support, but parallel visibility tools can be built now.</div>
   </div>
-
   <div class="slide-footer">
-    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <div class="sf-left"><span class="sf-brand">Confidential · Internal Use Only</span></div>
     <span class="sf-page">Final</span>
+    <div class="sf-powered">
+      <span class="sf-powered-label">powered by:</span>
+      <img src="opex.png" alt="Opex" />
+    </div>
   </div>
 </section>
 
@@ -1002,7 +935,7 @@
     <span class="line2">to Predictive Readiness</span>
   </h2>
   <p class="closing-sub">
-    SKU → BOM → Lead Time → Inventory → Forecast — all in one place. 
+    SKU → BOM → Lead Time → Inventory → Forecast — all in one place.
     The path from fragmented data to production confidence starts now.
   </p>
   <div class="closing-badges">
