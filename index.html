@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKU-Level Production Readiness | OEL Raising the Standard of EMS Performance</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0e1a;
+    --paper: #f5f2eb;
+    --accent: #e8380d;
+    --gold: #c9a84c;
+    --steel: #2c3e6b;
+    --mist: #8a94a8;
+    --light: #eef0f5;
+    --safe: #1a8a5a;
+    --risk: #e8380d;
+    --warn: #d4870f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--ink);
+    color: var(--paper);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(10,14,26,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.15em; color: var(--gold); }
+  .nav-pills { display: flex; gap: 0.4rem; }
+  .nav-pill {
+    font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.3rem 0.8rem; border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--mist); cursor: pointer; transition: all 0.2s;
+    text-decoration: none;
+  }
+  .nav-pill:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* SLIDES */
+  .slide {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 7rem 3rem 4rem;
+    position: relative; overflow: hidden;
+  }
+
+  /* HERO */
+  #hero {
+    background: var(--ink);
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 4rem;
+    padding: 7rem 6rem 4rem;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: 1.5rem;
+    border-left: 3px solid var(--accent); padding-left: 0.8rem;
+  }
+  .hero-title {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-sub {
+    color: var(--mist); font-size: 1rem; line-height: 1.7; max-width: 480px;
+  }
+  .hero-meta { margin-top: 2.5rem; display: flex; gap: 2rem; }
+  .hero-meta-item { font-size: 0.75rem; color: var(--mist); }
+  .hero-meta-item strong { display: block; font-size: 1.4rem; font-family: 'Syne', sans-serif; color: var(--paper); margin-bottom: 0.1rem; }
+
+  .hero-visual {
+    position: relative; display: flex; align-items: center; justify-content: center;
+  }
+  .orbit-ring {
+    position: relative; width: 380px; height: 380px;
+    border: 1px solid rgba(201,168,76,0.2); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    animation: spin-slow 30s linear infinite;
+  }
+  .orbit-ring::before {
+    content: ''; position: absolute; inset: 20px;
+    border: 1px solid rgba(232,56,13,0.15); border-radius: 50%;
+  }
+  @keyframes spin-slow { to { transform: rotate(360deg); } }
+  .orbit-center {
+    position: absolute; width: 100px; height: 100px;
+    background: linear-gradient(135deg, var(--steel), var(--ink));
+    border: 2px solid var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    animation: counter-spin 30s linear infinite;
+    font-family: 'Syne', sans-serif; font-size: 0.65rem; letter-spacing: 0.1em;
+    text-align: center; color: var(--gold); font-weight: 700;
+  }
+  @keyframes counter-spin { to { transform: rotate(-360deg); } }
+  .orbit-node {
+    position: absolute; width: 56px; height: 56px; border-radius: 50%;
+    background: var(--steel); border: 1.5px solid rgba(201,168,76,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.55rem; text-align: center; color: var(--paper); font-weight: 500;
+    animation: counter-spin 30s linear infinite;
+  }
+  .orbit-node.n1 { top: -28px; left: 50%; transform: translateX(-50%); }
+  .orbit-node.n2 { bottom: -28px; left: 50%; transform: translateX(-50%); }
+  .orbit-node.n3 { left: -28px; top: 50%; transform: translateY(-50%); }
+  .orbit-node.n4 { right: -28px; top: 50%; transform: translateY(-50%); }
+  .orbit-node.n5 { top: 15%; right: -20px; }
+  .orbit-node.n6 { bottom: 15%; left: -20px; }
+
+  /* SECTION HEADERS */
+  .slide-header { margin-bottom: 3rem; }
+  .slide-number {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.5rem; font-weight: 600;
+  }
+  .slide-title {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.1;
+  }
+  .slide-title span { color: var(--gold); }
+  .slide-desc { color: var(--mist); margin-top: 0.6rem; font-size: 0.95rem; line-height: 1.6; max-width: 700px; }
+
+  /* DARK BG VARIATIONS */
+  .bg-dark { background: var(--ink); }
+  .bg-darker { background: #060810; }
+  .bg-steel { background: #111827; }
+
+  /* DIVIDERS */
+  .divider { width: 60px; height: 3px; background: var(--accent); margin: 1rem 0 2rem; }
+
+  /* PROCESS FLOW */
+  .process-flow {
+    display: flex; align-items: stretch; gap: 0; margin-top: 1rem;
+    overflow-x: auto; padding-bottom: 1rem;
+  }
+  .process-step {
+    flex: 1; min-width: 140px; background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08); border-right: none;
+    padding: 1.5rem 1.2rem;
+    position: relative; transition: background 0.3s;
+  }
+  .process-step:last-child { border-right: 1px solid rgba(255,255,255,0.08); }
+  .process-step:hover { background: rgba(255,255,255,0.06); }
+  .process-step::after {
+    content: '→';
+    position: absolute; right: -14px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold); font-size: 1.2rem; z-index: 2;
+    background: var(--ink); padding: 0 2px;
+  }
+  .process-step:last-child::after { display: none; }
+  .step-num {
+    font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
+    color: rgba(201,168,76,0.15); line-height: 1; margin-bottom: 0.5rem;
+  }
+  .step-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.4rem; font-weight: 600; }
+  .step-title { font-size: 0.85rem; font-weight: 500; color: var(--paper); margin-bottom: 0.3rem; }
+  .step-note { font-size: 0.72rem; color: var(--mist); line-height: 1.4; }
+
+  /* ISSUE HIGHLIGHT */
+  .issue-box {
+    background: rgba(232,56,13,0.08); border: 1px solid rgba(232,56,13,0.3);
+    border-left: 4px solid var(--accent);
+    padding: 1.2rem 1.5rem; border-radius: 2px; margin-top: 1.5rem;
+  }
+  .issue-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 0.4rem; }
+  .issue-text { font-size: 0.9rem; color: var(--paper); line-height: 1.6; }
+
+  /* PHASE CARDS */
+  .phase-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem; }
+  .phase-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 1.5rem; position: relative; overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .phase-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .phase-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent);
+  }
+  .phase-card.parallel::before { background: var(--gold); }
+  .phase-num { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; color: rgba(255,255,255,0.05); line-height: 1; margin-bottom: 0.8rem; }
+  .phase-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--paper); margin-bottom: 0.5rem; }
+  .phase-items { list-style: none; }
+  .phase-items li { font-size: 0.75rem; color: var(--mist); padding: 0.2rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.4; }
+  .phase-items li:last-child { border-bottom: none; }
+  .phase-tag { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 100px; margin-top: 1rem; display: inline-block; }
+  .tag-seq { background: rgba(232,56,13,0.15); color: var(--accent); border: 1px solid rgba(232,56,13,0.3); }
+  .tag-par { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+
+  .parallel-note {
+    grid-column: 1/-1; background: rgba(201,168,76,0.06);
+    border: 1px dashed rgba(201,168,76,0.3);
+    padding: 0.8rem 1.5rem; font-size: 0.8rem; color: var(--gold);
+    text-align: center;
+  }
+
+  /* DATA PILLARS */
+  .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 1rem; }
+  .pillar {
+    position: relative; padding: 2rem 1.5rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.07);
+    transition: all 0.3s;
+  }
+  .pillar:hover { background: rgba(255,255,255,0.05); }
+  .pillar-num {
+    font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800;
+    color: rgba(201,168,76,0.08); position: absolute; top: 0.5rem; right: 1rem;
+    line-height: 1;
+  }
+  .pillar-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .pillar-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--paper); margin-bottom: 0.5rem; }
+  .pillar-source { font-size: 0.7rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; }
+  .pillar-desc { font-size: 0.78rem; color: var(--mist); line-height: 1.6; }
+  .pillar-status {
+    margin-top: 1rem; padding: 0.3rem 0.7rem; border-radius: 2px;
+    font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+    display: inline-block;
+  }
+  .status-easy { background: rgba(26,138,90,0.15); color: var(--safe); border: 1px solid rgba(26,138,90,0.3); }
+  .status-hard { background: rgba(232,56,13,0.15); color: var(--risk); border: 1px solid rgba(232,56,13,0.3); }
+  .status-med { background: rgba(212,135,15,0.15); color: var(--warn); border: 1px solid rgba(212,135,15,0.3); }
+
+  /* ROLLING PLAN */
+  .rolling-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+  .rolling-table th {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--mist); font-weight: 500; padding: 0.6rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left;
+  }
+  .rolling-table td {
+    padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.85rem; vertical-align: middle;
+  }
+  .rolling-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .month-badge {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 1rem; color: var(--paper);
+  }
+  .bar-wrap { background: rgba(255,255,255,0.05); border-radius: 2px; height: 10px; margin-top: 0.3rem; }
+  .bar-fill { height: 10px; border-radius: 2px; }
+  .act-bar { background: var(--accent); }
+  .sec-bar { background: var(--safe); }
+  .plan-bar { background: var(--gold); }
+
+  /* DMAIC */
+  .dmaic-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: rgba(255,255,255,0.06); margin-top: 1.5rem; }
+  .dmaic-cell {
+    background: var(--ink); padding: 1.8rem 1.2rem;
+    transition: background 0.3s;
+  }
+  .dmaic-cell:hover { background: rgba(255,255,255,0.04); }
+  .dmaic-letter {
+    font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800;
+    line-height: 1; margin-bottom: 0.3rem;
+  }
+  .dmaic-word { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mist); margin-bottom: 1rem; }
+  .dmaic-content { font-size: 0.8rem; color: var(--paper); line-height: 1.6; }
+  .dmaic-content li { list-style: none; padding: 0.2rem 0; color: var(--mist); font-size: 0.75rem; }
+  .dmaic-content li::before { content: '→ '; color: var(--gold); }
+
+  /* VISIBILITY TABLE */
+  .vis-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+  .vis-table th {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--mist); font-weight: 600; padding: 0.8rem 1rem;
+    border-bottom: 2px solid rgba(255,255,255,0.1); text-align: left;
+    background: rgba(255,255,255,0.02);
+  }
+  .vis-table td { padding: 0.9rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
+  .vis-table tr:hover td { background: rgba(255,255,255,0.03); }
+  .risk-chip {
+    padding: 0.25rem 0.7rem; border-radius: 100px; font-size: 0.7rem; font-weight: 600;
+    display: inline-block;
+  }
+  .chip-high { background: rgba(232,56,13,0.2); color: #ff6347; border: 1px solid rgba(232,56,13,0.4); }
+  .chip-med { background: rgba(212,135,15,0.2); color: #f0a030; border: 1px solid rgba(212,135,15,0.4); }
+  .chip-low { background: rgba(26,138,90,0.2); color: #3cb87a; border: 1px solid rgba(26,138,90,0.4); }
+
+  /* IMPACT */
+  .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+  .impact-card {
+    padding: 1.8rem 1.5rem; background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    position: relative; overflow: hidden;
+  }
+  .impact-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .impact-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
+  .impact-head { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--paper); margin-bottom: 0.4rem; }
+  .impact-body { font-size: 0.78rem; color: var(--mist); line-height: 1.6; }
+
+  /* CLOSING */
+  #closing {
+    background: linear-gradient(135deg, #060810 0%, #111827 50%, #0a0e1a 100%);
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center; padding: 7rem 4rem;
+  }
+  .closing-tag { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
+  .closing-title {
+    font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4.5rem);
+    font-weight: 800; line-height: 1.05; max-width: 900px; margin-bottom: 2rem;
+  }
+  .closing-title .line2 { color: var(--gold); display: block; }
+  .closing-sub { color: var(--mist); font-size: 1rem; max-width: 600px; line-height: 1.7; margin-bottom: 3rem; }
+  .closing-badges { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .badge {
+    padding: 0.6rem 1.4rem; border: 1px solid rgba(201,168,76,0.4);
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600;
+  }
+
+  /* GUTTER LINES */
+  .gutter-line {
+    position: absolute; top: 0; bottom: 0; width: 1px;
+    background: rgba(255,255,255,0.03);
+  }
+
+  /* FOOTER OF SLIDE */
+  .slide-footer {
+    position: absolute; bottom: 1.5rem; left: 3rem; right: 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1rem;
+  }
+  .sf-brand { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+  .sf-page { font-family: 'Syne', sans-serif; font-size: 0.7rem; color: rgba(255,255,255,0.2); }
+
+  /* CONNECTOR CHAIN */
+  .chain { display: flex; align-items: center; gap: 0; margin: 1.5rem 0; overflow-x: auto; }
+  .chain-node {
+    padding: 0.8rem 1.2rem; background: rgba(44,62,107,0.4);
+    border: 1px solid rgba(44,62,107,0.8);
+    font-size: 0.8rem; font-weight: 500; white-space: nowrap; text-align: center;
+    flex-shrink: 0;
+  }
+  .chain-node.highlight {
+    background: rgba(201,168,76,0.15); border-color: var(--gold); color: var(--gold); font-weight: 700;
+  }
+  .chain-arr { color: var(--gold); padding: 0 0.3rem; font-size: 1rem; flex-shrink: 0; }
+
+  /* PROBLEM CARDS */
+  .prob-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+  .prob-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); padding: 1.4rem; }
+  .prob-icon { font-size: 1.6rem; margin-bottom: 0.6rem; }
+  .prob-title { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--paper); margin-bottom: 0.5rem; }
+  .prob-body { font-size: 0.75rem; color: var(--mist); line-height: 1.6; }
+
+  /* SCROLL INDICATOR */
+  .scroll-hint {
+    position: absolute; bottom: 3.5rem; left: 50%; transform: translateX(-50%);
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.2); text-align: center;
+  }
+  .scroll-hint::after {
+    content: '↓'; display: block; font-size: 1.2rem; margin-top: 0.2rem;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    #hero { grid-template-columns: 1fr; padding: 7rem 2rem 4rem; }
+    .hero-visual { display: none; }
+    .phase-grid, .pillars { grid-template-columns: 1fr 1fr; }
+    .dmaic-grid { grid-template-columns: 1fr; }
+    .impact-grid, .prob-grid { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-pills { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">OEL Raising the Standard of EMS Performance</div>
+  <div class="nav-pills">
+    <a class="nav-pill" href="#context">Context</a>
+    <a class="nav-pill" href="#process">Process</a>
+    <a class="nav-pill" href="#phases">Phases</a>
+    <a class="nav-pill" href="#data">Data</a>
+    <a class="nav-pill" href="#rolling">Rolling Plan</a>
+    <a class="nav-pill" href="#dmaic">DMAIC</a>
+    <a class="nav-pill" href="#visibility">Visibility</a>
+    <a class="nav-pill" href="#impact">Impact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="slide">
+  <div>
+    <div class="hero-eyebrow">OEL Raising the Standard of EMS Performance</div>
+    <h1 class="hero-title">
+      SKU-Level<br><span>Production</span><br>Readiness
+    </h1>
+    <p class="hero-sub">
+      Connecting forecast demand with BOM components, supplier lead times, and inventory availability — to prevent production disruptions before they happen.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><strong>DMAIC</strong>Methodology</div>
+      <div class="hero-meta-item"><strong>SAP</strong>Goes Live Apr 1</div>
+      <div class="hero-meta-item"><strong>4</strong>Data Pillars</div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="orbit-ring">
+      <div class="orbit-node n1">FORECAST</div>
+      <div class="orbit-node n2">INVENTORY</div>
+      <div class="orbit-node n3">LEAD TIME</div>
+      <div class="orbit-node n4">BOM</div>
+      <div class="orbit-node n5">SKU</div>
+      <div class="orbit-node n6">RISK</div>
+      <div class="orbit-center">PRODUCTION<br>READY</div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll to explore</div>
+  <div class="slide-footer">
+    <span class="sf-brand">Confidential · Internal Use Only</span>
+    <span class="sf-page">01 / 08</span>
+  </div>
+</section>
+
+<!-- CONTEXT / PROBLEM -->
+<section id="context" class="slide bg-steel" style="padding: 7rem 6rem 5rem;">
+  <div class="slide-header">
+    <div class="slide-number">01 — Problem Context</div>
+    <h2 class="slide-title">Where We Are <span>Today</span></h2>
+    <div class="divider"></div>
+    <p class="slide-desc">Critical planning data sits across multiple teams with no integration — creating blind spots in material readiness assessment.</p>
+  </div>
+
+  <div class="prob-grid">
+    <div class="prob-card">
+      <div class="prob-icon">📦</div>
+      <div class="prob-title">Fragmented Data Ownership</div>
+      <div class="prob-body">Brand/SKU lives with PM, BOM with Engineering, Lead Times with Procurement/ODM, Inventory with Warehouse. No single connected view exists.</div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon">⏱️</div>
+      <div class="prob-title">Lead Time Not BOM-Based</div>
+      <div class="prob-body">Lead times are provided at a general product level, not component level. Critical long-lead components are missed until it's too late.</div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon">🔗</div>
+      <div class="prob-title">ODM Dependency Gap</div>
+      <div class="prob-body">Imported/ODM-controlled components lack internal visibility. Sourcing decisions sit outside direct control, making accurate lead time analysis difficult.</div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon">🔄</div>
+      <div class="prob-title">Reactive Procurement</div>
+      <div class="prob-body">Without early visibility, procurement escalations become reactive. This creates risk of line stoppages and idle manpower.</div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon">🚫</div>
+      <div class="prob-title">No Logistics Loop</div>
+      <div class="prob-body">PPC proceeds with planning without consulting logistics — a key gap that impacts dispatch and delivery planning accuracy.</div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon">💰</div>
+      <div class="prob-title">Business Impact</div>
+      <div class="prob-body">Delivery delays → customer dissatisfaction → financial target discrepancies → revenue impact. The problem cascades from planning all the way to business performance.</div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <span class="sf-page">02 / 08</span>
+  </div>
+</section>
+
+<!-- CURRENT PROCESS -->
+<section id="process" class="slide bg-darker" style="padding: 7rem 6rem 5rem;">
+  <div class="slide-header">
+    <div class="slide-number">02 — Current State</div>
+    <h2 class="slide-title">How Planning <span>Flows Today</span></h2>
+    <div class="divider"></div>
+    <p class="slide-desc">The current information flow from customer forecast to production — with the critical gap identified.</p>
+  </div>
+
+  <div class="process-flow">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-label">Customer</div>
+      <div class="step-title">Provides Forecast</div>
+      <div class="step-note">Demand plan shared with PM & OM teams</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-label">PM Team</div>
+      <div class="step-title">Receives Forecast</div>
+      <div class="step-note">Maintains PM tracker using 4M method</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-label">PM → PPC</div>
+      <div class="step-title">Forecast Shared</div>
+      <div class="step-note">PPC receives demand plan from PM</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <div class="step-label">PPC</div>
+      <div class="step-title">Requests ETA</div>
+      <div class="step-note">Asks PM for material availability dates</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">05</div>
+      <div class="step-label">PM → ODM</div>
+      <div class="step-title">ETA Requested</div>
+      <div class="step-note">PM reaches out to ODM for component ETAs</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">06</div>
+      <div class="step-label">PM → PPC</div>
+      <div class="step-title">ETA + Lead Time</div>
+      <div class="step-note">General (not BOM-based) lead time provided</div>
+    </div>
+    <div class="process-step" style="border: 1px solid rgba(232,56,13,0.4);">
+      <div class="step-num" style="color: rgba(232,56,13,0.3);">07</div>
+      <div class="step-label" style="color: var(--risk);">Gap Point</div>
+      <div class="step-title">PPC Plans</div>
+      <div class="step-note" style="color: rgba(232,56,13,0.7);">Without consulting logistics. No component-level analysis.</div>
+    </div>
+  </div>
+
+  <div class="issue-box">
+    <div class="issue-label">⚠ Critical Gap Identified</div>
+    <div class="issue-text">Lead time used in planning is <strong>not BOM-specific</strong>. It is provided at product level rather than component level — meaning long-lead critical components are never flagged until a shortage occurs. Additionally, logistics is not consulted, creating a disconnect in dispatch planning.</div>
+  </div>
+
+  <div class="slide-footer">
+    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <span class="sf-page">03 / 08</span>
+  </div>
+</section>
+
+<!-- PROJECT PHASES -->
+<section id="phases" class="slide bg-dark" style="padding: 7rem 6rem 5rem;">
+  <div class="slide-header">
+    <div class="slide-number">03 — Ideal Structure</div>
+    <h2 class="slide-title">Project Phase <span>Framework</span></h2>
+    <div class="divider"></div>
+    <p class="slide-desc">Phases 2 and 3 should run in parallel — BOM lead time analysis and PPC forecast preparation complete simultaneously before material planning begins.</p>
+  </div>
+
+  <div class="phase-grid">
+    <div class="phase-card">
+      <div class="phase-num">01</div>
+      <div class="phase-name">New Project Kickoff</div>
+      <ul class="phase-items">
+        <li>Business closure confirmed</li>
+        <li>Line readiness assessment</li>
+        <li>PM tracker initiated (4M method)</li>
+        <li>DVT sample kits arranged</li>
+        <li>DVT approval obtained</li>
+      </ul>
+      <span class="phase-tag tag-seq">Sequential</span>
+    </div>
+    <div class="phase-card parallel">
+      <div class="phase-num">02</div>
+      <div class="phase-name">PVT & BOM Lead Time</div>
+      <ul class="phase-items">
+        <li>PVT conducted</li>
+        <li>PVT approval obtained</li>
+        <li>BOM lead time calculation starts</li>
+        <li>Component-wise LT analysis</li>
+        <li>ODM lead time mapped</li>
+      </ul>
+      <span class="phase-tag tag-par">Parallel with Phase 3</span>
+    </div>
+    <div class="phase-card parallel">
+      <div class="phase-num">03</div>
+      <div class="phase-name">Forecast & Inventory</div>
+      <ul class="phase-items">
+        <li>PPC prepares forecast plan</li>
+        <li>SKU-wise inventory analysis</li>
+        <li>BOM-based gap identification</li>
+        <li>Shortage list generated</li>
+        <li>Risk components flagged</li>
+      </ul>
+      <span class="phase-tag tag-par">Parallel with Phase 2</span>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">04</div>
+      <div class="phase-name">Material Planning</div>
+      <ul class="phase-items">
+        <li>Consolidated MP initiated</li>
+        <li>Procurement orders placed</li>
+        <li>Logistics loop included</li>
+        <li>Rolling plan activated</li>
+        <li>SAP integration (post Apr 1)</li>
+      </ul>
+      <span class="phase-tag tag-seq">After Phase 2+3</span>
+    </div>
+    <div class="parallel-note">
+      ⚡ Phases 2 and 3 must run concurrently — both must be completed before Phase 4 begins. This is the key structural improvement over the current sequential process.
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <span class="sf-page">04 / 08</span>
+  </div>
+</section>
+
+<!-- DATA PILLARS -->
+<section id="data" class="slide bg-steel" style="padding: 7rem 6rem 5rem;">
+  <div class="slide-header">
+    <div class="slide-number">04 — Visibility Architecture</div>
+    <h2 class="slide-title">The <span>4 Data Pillars</span></h2>
+    <div class="divider"></div>
+    <p class="slide-desc">Four connected datasets — when combined — deliver complete SKU-level production readiness visibility.</p>
+  </div>
+
+  <div class="chain">
+    <div class="chain-node highlight">Brand + SKU</div>
+    <div class="chain-arr">→</div>
+    <div class="chain-node highlight">SKU + BOM</div>
+    <div class="chain-arr">→</div>
+    <div class="chain-node highlight">Component + Lead Time</div>
+    <div class="chain-arr">→</div>
+    <div class="chain-node highlight">SKU + Forecast</div>
+    <div class="chain-arr">→</div>
+    <div class="chain-node" style="background: rgba(232,56,13,0.15); border-color: var(--accent); color: var(--paper);">Full Visibility + Risk Alerts</div>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">1</div>
+      <div class="pillar-icon">🏷️</div>
+      <div class="pillar-name">Brand w.r.t. SKU</div>
+      <div class="pillar-source">Source: PM Team</div>
+      <div class="pillar-desc">Maps each brand to its specific SKU variants. Foundation layer that ties all other data together. PM team can provide both Brand and SKU data.</div>
+      <span class="pillar-status status-easy">✓ Readily Available</span>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">2</div>
+      <div class="pillar-icon">🔩</div>
+      <div class="pillar-name">SKU w.r.t. BOM</div>
+      <div class="pillar-source">Source: NPI Team</div>
+      <div class="pillar-desc">Each SKU variant maps to a complete BOM including all alternates. Enables precise component-level requirement calculation per product configuration.</div>
+      <span class="pillar-status status-easy">✓ Available via NPI</span>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">3</div>
+      <div class="pillar-icon">⏳</div>
+      <div class="pillar-name">Component w.r.t. Lead Time</div>
+      <div class="pillar-source">Source: Purchase / ODM / PM</div>
+      <div class="pillar-desc">
+        <strong style="color:var(--safe);font-size:0.7rem;">Local:</strong> Purchase team has invoices — extractable.<br><br>
+        <strong style="color:var(--risk);font-size:0.7rem;">ODM/Imported:</strong> Difficult — ODM controls sourcing. Deeper analysis needed with PM team to unlock this data.
+      </div>
+      <span class="pillar-status status-hard">⚠ Major Throwback</span>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">4</div>
+      <div class="pillar-icon">📈</div>
+      <div class="pillar-name">SKU w.r.t. Forecast</div>
+      <div class="pillar-source">Source: PM Team</div>
+      <div class="pillar-desc">SKU-level demand plan linked with BOM and lead time data. Final layer that enables complete production readiness and shortage risk visibility.</div>
+      <span class="pillar-status status-med">→ PM to Provide</span>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <span class="sf-page">05 / 08</span>
+  </div>
+</section>
+
+<!-- ROLLING PLAN -->
+<section id="rolling" class="slide bg-darker" style="padding: 7rem 6rem 5rem;">
+  <div class="slide-header">
+    <div class="slide-number">05 — Planning Concept</div>
+    <h2 class="slide-title">Rolling <span>Material Planning</span></h2>
+    <div class="divider"></div>
+    <p class="slide-desc">When Month 1 production is active, materials for Month 2 & 3 must already be secured. Month 4 procurement planning initiates at Month 1 midpoint.</p>
+  </div>
+
+  <table class="rolling-table">
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Primary Activity</th>
+        <th>Material Status</th>
+        <th>Planning Action</th>
+        <th>Readiness</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="month-badge">M1</span></td>
+        <td>🏭 Active Production</td>
+        <td>
+          <div style="font-size:0.75rem;color:var(--safe);">In hand</div>
+          <div class="bar-wrap"><div class="bar-fill act-bar" style="width:100%"></div></div>
+        </td>
+        <td style="color:var(--mist);font-size:0.8rem;">Monitor consumption rate. Trigger M4 plan at 50% completion.</td>
+        <td><span class="risk-chip chip-low">● Secure</span></td>
+      </tr>
+      <tr>
+        <td><span class="month-badge">M2</span></td>
+        <td>📦 Materials Secured</td>
+        <td>
+          <div style="font-size:0.75rem;color:var(--safe);">Already available</div>
+          <div class="bar-wrap"><div class="bar-fill sec-bar" style="width:100%"></div></div>
+        </td>
+        <td style="color:var(--mist);font-size:0.8rem;">Production planning confirmed. Line schedule locked.</td>
+        <td><span class="risk-chip chip-low">● Secure</span></td>
+      </tr>
+      <tr>
+        <td><span class="month-badge">M3</span></td>
+        <td>📦 Materials Secured</td>
+        <td>
+          <div style="font-size:0.75rem;color:var(--warn);">In transit / warehouse</div>
+          <div class="bar-wrap"><div class="bar-fill sec-bar" style="width:80%"></div></div>
+        </td>
+        <td style="color:var(--mist);font-size:0.8rem;">Confirm delivery. Resolve any component gaps before M1 midpoint.</td>
+        <td><span class="risk-chip chip-med">● Monitor</span></td>
+      </tr>
+      <tr>
+        <td><span class="month-badge">M4</span></td>
+        <td>📋 Procurement Planning</td>
+        <td>
+          <div style="font-size:0.75rem;color:var(--risk);">Orders being placed</div>
+          <div class="bar-wrap"><div class="bar-fill plan-bar" style="width:40%"></div></div>
+        </td>
+        <td style="color:var(--mist);font-size:0.8rem;">Orders placed when M1 reaches 50% completion. Long-lead items prioritised first.</td>
+        <td><span class="risk-chip chip-high">● Planning</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="issue-box" style="border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.05); border-left-color: var(--gold); margin-top: 1.5rem;">
+    <div class="issue-label" style="color:var(--gold);">💡 Key Principle</div>
+    <div class="issue-text">This rolling approach ensures <strong>continuous material flow</strong> and prevents production stoppages. Lead time of critical components must be considered from the start — not after a shortage occurs.</div>
+  </div>
+
+  <div class="slide-footer">
+    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <span class="sf-page">06 / 08</span>
+  </div>
+</section>
+
+<!-- DMAIC -->
+<section id="dmaic" class="slide bg-dark" style="padding: 7rem 6rem 5rem;">
+  <div class="slide-header">
+    <div class="slide-number">06 — Improvement Methodology</div>
+    <h2 class="slide-title">DMAIC <span>Framework</span></h2>
+    <div class="divider"></div>
+    <p class="slide-desc">Following Six Sigma's structured DMAIC approach to systematically eliminate the planning visibility gap. Control phase will be developed over time.</p>
+  </div>
+
+  <div class="dmaic-grid">
+    <div class="dmaic-cell">
+      <div class="dmaic-letter" style="color: var(--accent);">D</div>
+      <div class="dmaic-word">Define</div>
+      <div class="dmaic-content">
+        <p style="color:var(--paper);font-size:0.8rem;margin-bottom:0.8rem;">Lack of SKU-wise BOM & lead time visibility causing:</p>
+        <ul>
+          <li>Production delays</li>
+          <li>Material shortages</li>
+          <li>Delivery delays to customers</li>
+          <li>Idle manpower from line stoppages</li>
+          <li>Financial target discrepancies</li>
+          <li>Overall business impact</li>
+        </ul>
+      </div>
+    </div>
+    <div class="dmaic-cell" style="border-left:1px solid rgba(255,255,255,0.06);">
+      <div class="dmaic-letter" style="color: var(--gold);">M</div>
+      <div class="dmaic-word">Measure</div>
+      <div class="dmaic-content">
+        <p style="color:var(--paper);font-size:0.8rem;margin-bottom:0.8rem;">Collect and measure:</p>
+        <ul>
+          <li>Complete BOM data per SKU</li>
+          <li>Component-level lead times</li>
+          <li>Current inventory levels</li>
+          <li>Planning delay frequency</li>
+          <li>Procurement escalations</li>
+          <li>Material shortage instances</li>
+        </ul>
+      </div>
+    </div>
+    <div class="dmaic-cell" style="border-left:1px solid rgba(255,255,255,0.06);">
+      <div class="dmaic-letter" style="color: #4a9eff;">A</div>
+      <div class="dmaic-word">Analyze</div>
+      <div class="dmaic-content">
+        <p style="color:var(--paper);font-size:0.8rem;margin-bottom:0.8rem;">Root causes identified:</p>
+        <ul>
+          <li>BOM not integrated with planning</li>
+          <li>Lead time not component-wise</li>
+          <li>ODM dependency creates blindspots</li>
+          <li>Fragmented data ownership</li>
+          <li>Logistics not in planning loop</li>
+          <li>No centralized dashboard</li>
+        </ul>
+      </div>
+    </div>
+    <div class="dmaic-cell" style="border-left:1px solid rgba(255,255,255,0.06);">
+      <div class="dmaic-letter" style="color: var(--safe);">I</div>
+      <div class="dmaic-word">Improve</div>
+      <div class="dmaic-content">
+        <p style="color:var(--paper);font-size:0.8rem;margin-bottom:0.8rem;">Solutions to implement:</p>
+        <ul>
+          <li>SKU → BOM → LT mapping system</li>
+          <li>Centralized visibility dashboard</li>
+          <li>Risk alerts for unavailable SKUs</li>
+          <li>Lead time improvement process</li>
+          <li>SAP integration (from Apr 1)</li>
+          <li>Logistics included in planning</li>
+        </ul>
+      </div>
+    </div>
+    <div class="dmaic-cell" style="border-left:1px solid rgba(255,255,255,0.06); opacity: 0.7;">
+      <div class="dmaic-letter" style="color: var(--mist);">C</div>
+      <div class="dmaic-word">Control</div>
+      <div class="dmaic-content">
+        <p style="color:var(--mist);font-size:0.8rem;margin-bottom:0.8rem;font-style:italic;">To be developed over time:</p>
+        <ul>
+          <li>Regular data update cycles</li>
+          <li>Standardized reporting cadence</li>
+         
+          <li>Exception-based alerts</li>
+          
+          <li style="color:var(--gold);font-style:italic;">Still being analyzed...</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <span class="sf-page">07 / 08</span>
+  </div>
+</section>
+
+<!-- VISIBILITY TABLE -->
+<section id="visibility" class="slide bg-steel" style="padding: 7rem 6rem 5rem;">
+  <div class="slide-header">
+    <div class="slide-number">07 — Output View</div>
+    <h2 class="slide-title">Consolidated <span>Visibility Dashboard</span></h2>
+    <div class="divider"></div>
+    <p class="slide-desc">When all four data pillars are combined, this is what the planner sees — complete SKU-level production readiness at a glance.</p>
+  </div>
+
+  <table class="vis-table">
+    <thead>
+      <tr>
+        <th>Brand</th>
+        <th>SKU / Model</th>
+        <th>Forecast</th>
+        <th>Component</th>
+        <th>Source</th>
+        <th>Lead Time</th>
+        <th>Inventory</th>
+        <th>Shortage</th>
+        <th>Risk Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color:var(--gold);font-weight:500;">Brand A</td>
+        <td>Model X — 128GB Black</td>
+        <td>50,000 units</td>
+        <td>IC Chipset</td>
+        <td style="color:var(--risk);font-size:0.75rem;">ODM/Import</td>
+        <td style="color:var(--risk);">45 days</td>
+        <td>12,000</td>
+        <td style="color:var(--risk);">38,000</td>
+        <td><span class="risk-chip chip-high">● High Risk</span></td>
+      </tr>
+      <tr>
+        <td style="color:var(--gold);font-weight:500;">Brand A</td>
+        <td>Model X — 128GB White</td>
+        <td>30,000 units</td>
+        <td>Display Panel</td>
+        <td style="color:var(--safe);font-size:0.75rem;">Local</td>
+        <td style="color:var(--warn);">20 days</td>
+        <td>28,000</td>
+        <td style="color:var(--warn);">2,000</td>
+        <td><span class="risk-chip chip-med">● Monitor</span></td>
+      </tr>
+      <tr>
+        <td style="color:var(--gold);font-weight:500;">Brand B</td>
+        <td>Model Y — 64GB Blue</td>
+        <td>20,000 units</td>
+        <td>Battery Cell</td>
+        <td style="color:var(--safe);font-size:0.75rem;">Local</td>
+        <td style="color:var(--safe);">10 days</td>
+        <td>25,000</td>
+        <td style="color:var(--safe);">0</td>
+        <td><span class="risk-chip chip-low">● Safe</span></td>
+      </tr>
+      <tr>
+        <td style="color:var(--gold);font-weight:500;">Brand B</td>
+        <td>Model Z — 256GB Pro</td>
+        <td>15,000 units</td>
+        <td>Memory Module</td>
+        <td style="color:var(--risk);font-size:0.75rem;">ODM/Import</td>
+        <td style="color:var(--risk);">60 days</td>
+        <td>500</td>
+        <td style="color:var(--risk);">14,500</td>
+        <td><span class="risk-chip chip-high">● Critical</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;">
+    <div class="issue-box">
+      <div class="issue-label">⚠ Without This View</div>
+      <div class="issue-text" style="font-size:0.82rem;">High-risk components like IC Chipset (45-day lead, 38K shortage) and Memory Module (60-day lead, 14.5K shortage) go undetected until production is already impacted.</div>
+    </div>
+    <div class="issue-box" style="border-color:rgba(26,138,90,0.3);background:rgba(26,138,90,0.06);border-left-color:var(--safe);">
+      <div class="issue-label" style="color:var(--safe);">✓ With This View</div>
+      <div class="issue-text" style="font-size:0.82rem;">Procurement can be triggered 45–60 days early. Rolling plan activates automatically. Line stoppages are prevented before they occur. Financial targets protected.</div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <span class="sf-page">08 / 08</span>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact" class="slide bg-darker" style="padding: 7rem 6rem 5rem;">
+  <div class="slide-header">
+    <div class="slide-number">08 — Expected Outcomes</div>
+    <h2 class="slide-title">Business <span>Impact</span></h2>
+    <div class="divider"></div>
+    <p class="slide-desc">This is not a short-term project. It will take time to build — but the business impact will be significant and lasting.</p>
+  </div>
+
+  <div class="impact-grid">
+    <div class="impact-card">
+      <div class="impact-icon">🔍</div>
+      <div class="impact-head">Early Risk Detection</div>
+      <div class="impact-body">Component shortages and long-lead risks identified weeks ahead — not after the production line has already stopped.</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon">📦</div>
+      <div class="impact-head">Accurate Procurement</div>
+      <div class="impact-body">Purchase orders placed at the right time, for the right quantity — based on actual BOM requirements, not estimates.</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon">🏭</div>
+      <div class="impact-head">Zero Line Stoppages</div>
+      <div class="impact-body">Rolling material plan ensures continuous supply. Manpower remains productive. Production targets are met consistently.</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon">🚚</div>
+      <div class="impact-head">On-Time Delivery</div>
+      <div class="impact-body">Forecast aligned with material availability means customer delivery commitments are met — protecting relationships and revenue.</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon">🤝</div>
+      <div class="impact-head">Cross-Team Alignment</div>
+      <div class="impact-body">PM, Engineering, Procurement, Warehouse, PPC, and Logistics working from one shared data source — less escalation, faster decisions.</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon">💹</div>
+      <div class="impact-head">Financial Target Protection</div>
+      <div class="impact-body">Eliminating delays protects revenue. Accurate planning reduces emergency procurement costs and excess inventory carrying costs.</div>
+    </div>
+  </div>
+
+  <div class="issue-box" style="border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.05);border-left-color:var(--gold);margin-top:1.5rem;">
+    <div class="issue-label" style="color:var(--gold);">🎯 Core Objective</div>
+    <div class="issue-text">Create SKU-level production readiness visibility by linking BOM components, supplier lead times, inventory availability, and forecast demand — to enable accurate material planning and prevent production disruptions. SAP go-live (Apr 1) will add further structural support, but parallel visibility tools can be built now.</div>
+  </div>
+
+  <div class="slide-footer">
+    <span class="sf-brand">OEL Raising the Standard of EMS Performance</span>
+    <span class="sf-page">Final</span>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section id="closing">
+  <div class="closing-tag">OEL Noida · Production Planning & Control</div>
+  <h2 class="closing-title">
+    From Reactive Planning
+    <span class="line2">to Predictive Readiness</span>
+  </h2>
+  <p class="closing-sub">
+    SKU → BOM → Lead Time → Inventory → Forecast — all in one place. 
+    The path from fragmented data to production confidence starts now.
+  </p>
+  <div class="closing-badges">
+    <div class="badge">DMAIC Initiative</div>
+    <div class="badge">SAP Integration Ready</div>
+    <div class="badge">Long-Term Impact</div>
+    <div class="badge">Cross-Functional</div>
+  </div>
+</section>
+
+</body>
+</html>
